@@ -5,7 +5,14 @@ module.exports = {
     "./components/**/*.{js,jsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'xs': '360px',
+      },
+      backgroundImage: (theme) => ({
+        'darkTheme': 'linear-gradient(#171717, #475569)'
+      }),
+    },
   },
   plugins: [],
 }

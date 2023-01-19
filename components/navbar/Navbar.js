@@ -3,7 +3,7 @@ import LoginButton from "./Login-button"
 
 export default function Navbar() {
   return (
-    <div className="flex gap-9 items-center pr-9 pl-9 bg-gradient-to-b from-neutral-900 to-slate-600">
+    <div className="sm:grid grid-rows-1 grid-cols-12 items-center pr-9 pl-9 bg-darkTheme">
       <Navbarlink name="Search"/>
       <Navbarlink name="Photos"/>
       <Navbarlink name="How to"/>

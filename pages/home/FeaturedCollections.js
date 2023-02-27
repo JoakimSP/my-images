@@ -7,7 +7,7 @@ export default function FeaturedCollections() {
             <h1 className="font-extrabold h1 text-2xl mb-2">Featured collections</h1>
             <p>Discover a wide range of diffrent collections of images to fit your needs.</p>
         </div>
-        <div className="flex flex-wrap justify-between row-span-3">
+        <div className="flex flex-wrap justify-between row-span-3 mb-20">
             <Card name={"Cat"}/>
             <Card name={"Cat"}/>
             <Card name={"Cat"}/>

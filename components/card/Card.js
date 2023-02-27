@@ -1,18 +1,18 @@
-
+import Image from "next/image"
 
 export default function Card({ name }) {
     return (
         <span className="flex flex-col">
-            <div>
-                <img src="http://placekitten.com/400/300"/>
-            </div>
-            <div className="flex justify-center bg-white w-1/1 flex-1 text-center py-3 text-xl text-slate-500">
-                <span className="flex-1">
-                    <a>{name}</a>
-                </span>
-                <span className="text-black font-extrabold flex-0 ">
-                &#62;
-                </span>
+            <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow bg-white">
+                <a href="#">
+                    <img className="rounded-t-lg" src="http://placekitten.com/400/300" alt="Picutres" />
+                </a>
+                <div className="p-2">
+                    <a href="#">
+                        <h5 className="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900">placeholder text <p className="inline-block">&#62;</p></h5>
+
+                    </a>
+                </div>
             </div>
         </span>
     )

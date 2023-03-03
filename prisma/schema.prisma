@@ -14,3 +14,8 @@ model user {
   username   String @db.VarChar(255)
   email      String @db.VarChar(255)
 }
+
+model images {
+  id  Int    @id @default(autoincrement())
+  uid String @db.VarChar(255)
+}

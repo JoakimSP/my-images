@@ -1,6 +1,6 @@
 import Navbar from "../../components/navbar/Navbar"
 import Image from "next/image"
-import heroImage from '../../content/images/0A2DB59F-81B7-4C76-806E-4685D426FB43.JPG'
+import heroImage from '../../public/content/images/0A2DB59F-81B7-4C76-806E-4685D426FB43.JPG'
 
 export default function index() {
     return (

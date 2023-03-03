@@ -1,5 +1,5 @@
 
 
 export default function handle(req, res) {
-    res.json(200, {message: "You've logged in"})
+    res.status(200).json({message: "You've logged in"})
 }

@@ -1,71 +1,68 @@
-import { useState } from "react"
-import prisma from "../../lib/prisma"
-
-
-
-
-export async function getServerSideProps() {
-    const users = await prisma.user.findMany()
-    return {
-        props: {
-            users,
-        }
-    }
-}
-
-async function saveUser(contact) {
-    const respons = await fetch('api/addUser', {
-        method: 'POST',
-        body: JSON.stringify(contact)
-    })
-
-    if(!respons.ok) {
-        throw new Error(respons.statusText)
-    }
-
-    return await respons.json();
-}
+import { useRef } from "react"
 
 
 export default function signUp({ users }) {
-    const [userData, setUserData] = useState({})
+    const userName = useRef()
+    const firstName = useRef()
+    const lastName = useRef()
+    const email = useRef()
+    const password = useRef()
+    const repeatPassword = useRef()
 
-    console.log(users)
 
-    function handleFormInput(event) {
-        const { name, value } = event.target
-        const updatedData = { ...userData }
-        updatedData[name] = value
-        setUserData(updatedData)
-    }
 
-    function handleFormSubmit(event) {
-        event.preventDefault()
-        saveUser(users)
+    async function registerAccount(e) {
+        e.preventDefault()
+
+        const accountInfo = {
+            username: userName.current.value,
+            firstname: firstName.current.value,
+            lastname: lastName.current.value,
+            email: email.current.value,
+            password: password.current.value,
+            rpassword: repeatPassword.current.value
+        }
+        console.log(accountInfo)
+
+        const response = await fetch('../api/addNewUser', {
+           method: "POST",
+           headers: {
+               "Content-Type": "application/json"
+           },
+           body : JSON.stringify({
+               accountInfo
+           })
+       })
+       const data = await response.text()
+       console.log(data)
     }
 
     return (
         <div className="w-96 m-auto my-5">
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={registerAccount}>
+                <div className="mb-6">
+                    <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900">Username</label>
+                    <input type="text" id="username" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" name="username" ref={userName} required />
+                </div>
                 <div className="mb-6">
                     <label htmlFor="firstname" className="block mb-2 text-sm font-medium text-gray-900">Firstname</label>
-                    <input type="text" id="firstname" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Joe" name="firstname" onChange={handleFormInput} required />
+                    <input type="text" id="firstname" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Joe" name="firstname" ref={firstName} required />
                 </div>
                 <div className="mb-6">
                     <label htmlFor="lastname" className="block mb-2 text-sm font-medium text-gray-900">Lastname</label>
-                    <input type="text" id="lastname" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Average" name="lastname" onChange={handleFormInput} required />
+                    <input type="text" id="lastname" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Average" name="lastname" ref={lastName} required />
                 </div>
                 <div className="mb-6">
                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                    <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" name="email" onChange={handleFormInput} required />
+                    <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" name="email" ref={email} required />
                 </div>
                 <div className="mb-6">
                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Your password</label>
-                    <input type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" name="password" onChange={handleFormInput} required />
+                    <input type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" name="password" ref={password} required />
                 </div>
                 <div className="mb-6">
                     <label htmlFor="repeat-password" className="block mb-2 text-sm font-medium text-gray-900">Repeat password</label>
-                    <input type="password" id="repeat-password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" name="repeat-password" onChange={handleFormInput} required />
+                    <input type="password" id="repeat-password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" name="repeat-password" ref={repeatPassword} required />
                 </div>
                 <div className="flex items-start mb-6">
                     <div className="flex items-center h-5">

@@ -23,10 +23,14 @@ model images {
 model photographer {
   personID Int @id @unique @default(autoincrement())
   userName String @default("") @unique @db.VarChar(255)
-  passWord String @default("") @db.VarChar(255)
+  password String @default("") @db.VarChar(255)
   firstName String @default("") @db.VarChar(255)
   lastName String @default("") @db.VarChar(255)
   email String @default("") @unique @db.VarChar(255)
+}
+
+model photographerInfo {
+  personID Int @id @unique @default(autoincrement())
   country String  @db.VarChar(255)
   city String  @db.VarChar(255)
   about String  @db.VarChar(255)

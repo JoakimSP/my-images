@@ -19,3 +19,19 @@ model images {
   id  Int    @id @default(autoincrement())
   uid String @db.VarChar(255)
 }
+
+model photographer {
+  personID Int @id @unique @default(autoincrement())
+  userName String @default("") @unique @db.VarChar(255)
+  passWord String @default("") @db.VarChar(255)
+  firstName String @default("") @db.VarChar(255)
+  lastName String @default("") @db.VarChar(255)
+  email String @default("") @unique @db.VarChar(255)
+  country String  @db.VarChar(255)
+  city String  @db.VarChar(255)
+  about String  @db.VarChar(255)
+  camera String  @db.VarChar(255)
+  lens String  @db.VarChar(255)
+  FavoritePhoto String  @db.VarChar(255)
+  PhotoPreference String  @db.VarChar(255)
+}

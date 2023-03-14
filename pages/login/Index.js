@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { useRef } from "react"
-import prisma from "../../lib/prisma"
 
 
 export default function Index() {
@@ -9,13 +8,11 @@ export default function Index() {
 
     function checkLoginInfo(e) {
         e.preventDefault()
-        
-        try {
-            const respons = fetch('/../')
-        } catch (error) {
-            console.log(error)
-        }
+        console.log(userName.current.value)
+        console.log(passWord.current.value)
+
     }
+    
 
     return (
         <div className="h-screen flex justify-center items-center">
@@ -50,7 +47,7 @@ export default function Index() {
                         <div>
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl my-2 w-full">Login</button>
                         </div>
-                        <div><Link href="./signUp">Create account</Link></div>
+                        <div><Link href="./login/signUp">Create account</Link></div>
                     </form>
                 </div>
             </div>

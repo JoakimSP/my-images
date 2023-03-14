@@ -15,4 +15,14 @@ module.exports = {
       },
     ]
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'placekitten.com',
+        port: '',
+        pathname: '/*/**',
+      },
+    ],
+  },
 }

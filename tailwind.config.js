@@ -10,7 +10,8 @@ module.exports = {
         'xs': '360px',
       },
       backgroundImage: (theme) => ({
-        'darkTheme': 'linear-gradient(#171717, #475569)'
+        'darkTheme': 'linear-gradient(#171717, #475569)',
+        
       }),
     },
   },

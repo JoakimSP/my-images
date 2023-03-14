@@ -2,7 +2,6 @@ import Navbar from "../../components/navbar/Navbar";
 import Searchbar from "../../components/searchbar";
 import Image from "next/image";
 import prisma from '../../lib/prisma';
-import BgImage from '../../public/5EC255C4-E950-4A1A-B1AE-2388483BA5C5.JPG'
 
 
 export default function index({ images }) {
@@ -11,20 +10,18 @@ export default function index({ images }) {
     <>
       <Navbar />
       <Searchbar />
-      <img src={`/content/images/${images.uid}`}/>
-      <Image src={`/content/images/${images.uid}`} width="300" height="300" alt="Pic"/>
-    {/*   <div className="flex flex-wrap">
+      <div className="flex flex-wrap">
          {images.map((image) => {
-          return  <img src={`../content/images/${image.uid}`} width="300" height="300" alt="image"/> 
+          return  <Image src={`/content/images/${image.uid}.JPG`} width={300} height={300} alt="Pic"/> 
          })}
-      </div> */}
+      </div> *
     </>
   )
 }
 
 export async function getServerSideProps() {
   const images = await prisma.images.findMany();
-  console.log(images)
+  console.log('images',images)
   return {
     props: { images },
   };
